@@ -26,10 +26,10 @@ exports.register = async (req, res) => {
     });
   
     try {
-      const { email, password } = req.body;
+      const { email, password,name } = req.body;
   
       // Validation
-      if (!email || !password) {
+      if (!email || !password || !name) {
         console.log('Missing required fields');
         return res.status(400).json({ 
           error: 'Email and password are required' 
@@ -64,6 +64,7 @@ exports.register = async (req, res) => {
   
       // Create user
       const user = await User.create({ 
+        name,
         email, 
         password 
       });
@@ -84,7 +85,12 @@ exports.register = async (req, res) => {
       // Send response
       res.status(201).json({
         message: 'Registration successful',
-        user: { id: user._id, email: user.email },
+        user: { 
+          id: user._id, 
+          email: user.email, 
+          name:user.name,
+          userType:user.userType
+        },
         accessToken,
         refreshToken
       });
@@ -121,6 +127,7 @@ exports.register = async (req, res) => {
         user: {
           id: user._id,
           email: user.email,
+          name:user.name,
           userType: user.userType
         }
       });
