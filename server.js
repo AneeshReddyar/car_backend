@@ -39,8 +39,10 @@ app.use((req, res, next) => {
 
 const authRoutes = require('./routes/auth.routes');
 const carRoutes =require('./routes/car.routes')
+const serviceRoutes =require('./routes/service.routes')
 app.use('/api/auth', authRoutes);
-app.use('/api/cars',carRoutes)
+app.use('/api/cars',carRoutes);
+app.use('/api/services',serviceRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

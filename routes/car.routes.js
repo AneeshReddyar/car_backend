@@ -4,7 +4,7 @@ const carController = require('../controllers/car.controller');
 const authMiddleware = require('../middlewares/auth.middleware');
 
 // All routes use auth middleware
-// router.use(authMiddleware);
+router.use(authMiddleware);
 
 // Car management routes
 router.post('/add', carController.addCar);
